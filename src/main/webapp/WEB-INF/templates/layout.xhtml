@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+        <h:outputStylesheet library="css" name="layout.css"/>
+        <title>MEMUJA Layout</title>
+    </h:head>
+
+    <h:body>
+        <ui:insert name="top">
+            <header class="navbar navbar-expand-lg top-nav-bar">
+                <h:link outcome="/index">
+                    <h:graphicImage class="navbar-brand text-white" height="45" library="images" name="layout/test_logo.png"/>
+                </h:link>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbarCollapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="topNavbarCollapse">
+                    <div class="navbar-nav mr-auto">
+                        <h:link class="top-nav-text" outcome="/index">PRINCIPAL</h:link>
+                        <h:link rendered="#{ctrlLogin.isConnected()}" class="top-nav-text" outcome="/users/profile">
+                            <f:param name="id" value="#{request.remoteUser}"/>
+                            PERFIL
+                        </h:link>
+                        <h:link class="top-nav-text" outcome="/memes/upload">SUBIR MEME</h:link>
+                    </div>
+                    <h:form class="form-inline my-2 my-lg-0">
+
+                        <h:commandButton class="btn btn-outline-success mr-2 btn-sm" 
+                                         rendered="#{!ctrlLogin.isConnected()}" action="/login" value="INGRESAR" />
+                        <h:commandButton class="btn btn-outline-danger mr-2 btn-sm" 
+                                         rendered="#{!ctrlLogin.isConnected()}" action="/users/register" value="REGISTRAR" />
+                        <h:commandButton class="btn btn-outline-danger mr-2 btn-sm" 
+                                         rendered="#{ctrlLogin.esADMIN()}" action="/users/admin" value="ADMINISTRAR" />
+                        <h:commandButton class="btn btn-outline-success mr-2 btn-sm" rendered="#{ctrlLogin.isConnected()}" action="#{ctrlLogin.logout()}" value="LOGOUT #{request.remoteUser}" />
+
+                    </h:form>
+                </div>
+            </header>
+        </ui:insert>
+
+        <ui:insert name="content">Content</ui:insert>
+
+        <ui:insert name="bottom">
+            <footer class="navbar fixed-bottom navbar-expand-sm bot-nav-bar">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bottomNavbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="bottomNavbarCollapse">
+                    <div class="navbar-nav mr-auto">
+                        <h:link class="bot-nav-text" outcome="/info/rules">REGLAS</h:link>
+                        <h:link class="bot-nav-text" outcome="/info/contact">CONTACTO</h:link>
+                        <h:link class="bot-nav-text" outcome="/info/about-us">SOBRE NOSOTROS</h:link>
+                        <a class="bot-nav-text" href="./game/phaser.html">DIVERSIÓN</a>
+                    </div>
+                    <h:link outcome="/index">
+                        <h:graphicImage class="navbar-brand text-white" height="35" library="images" name="layout/test_logo_white.png"/>
+                    </h:link>
+                </div>
+            </footer>
+        </ui:insert>
+    </h:body>
+</html>

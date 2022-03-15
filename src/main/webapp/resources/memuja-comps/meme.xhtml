@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="value" required="true"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <div class="container">
+
+            <div class="row">
+                <h3><bold>#{cc.attrs.value.titulo}</bold></h3>
+            </div>
+            <div class="row">
+                <p>Subido por:&nbsp; </p>
+                <span>
+                    <h:link outcome="/users/profile">
+                        <p><i>#{cc.attrs.value.usuario.usuario}</i></p>
+                        <f:param name="id" value="${cc.attrs.value.usuario.usuario}"/>
+                    </h:link>
+                </span>
+            </div>
+
+            <div class="row">
+                <h:link outcome="/memes/publication">
+                    <h:graphicImage width="100%" value="#{ctrlMemes.imagesUrl}/#{cc.attrs.value.rutaImg}"/>
+                    <f:param name="id" value="${cc.attrs.value.id}"/>
+                </h:link>      
+            </div>
+
+            <div class="row">
+                <div class="col-7 mt-3 pr-3">
+                    <div class='btn-group d-flex justify-content-between'> 
+                        <h:link type="button" class='btn btn-danger d-flex justify-content-around'>
+                            <p:graphicImage class='fluid' width="32" height="32" library="images" name="misc/test_like.JPG"/>#{cc.attrs.value.likes}
+                        </h:link>
+                        <h:link type='button' class='btn btn-info d-flex justify-content-around' outcome="/memes/publication" fragment="comment">
+                            <f:param name="id" value="#{cc.attrs.value.id}"></f:param>
+                            <p:graphicImage class='fluid' width="32" height="32" library="images" name="misc/test_comment.jpg"/>#{ctrlMemes.numComentarios(cc.attrs.value.id)}
+                        </h:link>
+                    </div>
+                </div>
+            </div>                
+        </div>
+    </cc:implementation>
+</html>

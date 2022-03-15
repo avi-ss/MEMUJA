@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/layout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+
+    <ui:define name="content">
+        <h:head>
+            <f:metadata>
+                <f:viewParam name="id" required="true"
+                             value="#{ ctrlUsuarios.usuario.usuario }"/>
+                <f:viewAction action="#{ ctrlUsuarios.recupera() }"/>
+            </f:metadata>
+        </h:head>
+        <h:body>
+            <div class="container my-5">
+                <div class="abs-center">
+                    <h:form  class="border p-3 form">
+
+                        <div class="form-group">
+                            <strong><p:outputLabel for="title" value="Nombre de usuario"/></strong>
+                            <p:inputText class="form-control" id="title" value="#{ctrlUsuarios.usuario.usuario}"  p:placeholder="Username"
+                                         requiredMessage="Introduzca el usuario" >
+
+                            </p:inputText>
+
+                            <div>
+                                <h:message style="color: #D20005" for="title"/>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <strong> <p:outputLabel for="clave1" value="Contraseña"/> </strong>
+                            <p:password class="form-control" id="clave1" value="#{ctrlUsuarios.usuario.contraseña}" required="true" requiredMessage="Contraseña no es válida" weakLabel="Débil"
+                                        strongLabel="Fuerte" goodLabel="Normal" p:placeholder="Password" match="clave2" feedback="true" promptLabel="Ingrese una clave"/>         
+                            <div><h:message style="color: #D20005" for="clave1" /></div>       
+
+
+
+                        </div>
+                        <div class="form-group">
+                            <p:password class="form-control" p:placeholder="Repeat Password" id="clave2" required="true" requiredMessage="Contraseña no es válida"/>
+                            <div><h:message style="color: #D20005" for="clave2" /></div>
+                        </div>
+                        <h:commandButton class="btn btn-primary" action="#{ctrlUsuarios.guarda()}" value="Modificar Usuario" /> 
+                    </h:form>
+                </div>
+            </div>
+        </h:body>
+    </ui:define>
+
+
+
+</ui:composition>

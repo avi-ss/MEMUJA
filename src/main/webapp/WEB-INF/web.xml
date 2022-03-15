@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" 
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <session-config>
+        <session-timeout> 30 </session-timeout> <!-- tiempo de inactividad -->
+        <cookie-config>
+            <http-only>true</http-only> <!-- evita acceso desde javascript -->
+            <secure>false</secure> <!-- true para forzar enviar por conexión segura TLS-->
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode> <!-- desactiva id de sesión en urls -->
+    </session-config>  
+    <welcome-file-list>
+        <welcome-file>index.jsf</welcome-file>
+    </welcome-file-list>
+    
+    <!-- Roles de usuarios que se van a utilizar en las reglas -->
+    <security-role>
+        <role-name>USUARIOS</role-name>
+    </security-role>
+    <security-role>
+        <role-name>ADMINISTRADORES</role-name>
+    </security-role>
+    <!-- Reglas de control de acceso: security-constraint, puede haber varias -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Usuarios identificados</web-resource-name>
+            <url-pattern>/users/admin</url-pattern>
+            <url-pattern>/users/edit</url-pattern>
+            <url-pattern>/users/profile</url-pattern>
+            <url-pattern>/memes/*</url-pattern>
+            
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>USUARIOS</role-name>
+            <role-name>ADMINISTRADORES</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    <data-source>
+        <name>java:global/jdbc/memuja</name> <!-- JNDI resource -->
+        <class-name>org.h2.jdbcx.JdbcDataSource</class-name> <!-- Driver -->
+        <url>jdbc:h2:~/h2db/memuja;AUTO_SERVER=TRUE</url> <!--DB in user folder -->
+        <user>memuja</user>
+        <password>adminsecret1</password>
+        <initial-pool-size>2</initial-pool-size>
+        <max-pool-size>10</max-pool-size>
+        <min-pool-size>5</min-pool-size>
+    </data-source>
+
+</web-app>

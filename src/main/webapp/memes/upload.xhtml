@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/layout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <main class="container my-5">
+            <div class="row flex-wrap-reverse">
+                <div class="col-md-6">
+                    <h:form enctype="multipart/form-data">
+                        <div class="form-group">
+                            <p:outputLabel for="title" value="Introduzca un título"/>
+                            <p:inputText class="form-control" id="title" value="#{ctrlMemes.meme.titulo}" p:placeholder="Un ingenioso título!"
+                                         requiredMessage="Introduzca un titulo válido" >
+                                
+                            </p:inputText>
+                            <small id='title-help'>Recuerda que no debes de poner un título ofensivo :)</small>
+                            <div>
+                                <h:message style="color: #D20005" for="title"/>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <h:outputLabel for='inputfile' value="Selecciona un archivo"/>
+                            <h:inputFile class="form-control-file" id="inputfile" value="#{ctrlMemes.file}" required="true" requiredMessage="El archivo es obligatorio!"/>
+                            <small id='file-help'>Puedes subir archivos de tipo .jpg o .png</small> 
+                            <div>
+                                <h:message style="color: #D20005" for="inputfile"/>
+                            </div>
+                        </div>
+                        <h:commandButton class="btn btn-primary" action="#{ctrlMemes.crea()}" value="Subir" />
+                    </h:form>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class='jumbotron'> 
+                        <h1 class='display-4'>Hola!
+                        </h1> 
+                        <span class='badge badge-warning'>Atención</span>
+                        <br/>
+                        Recuerda que para que tu publicación sea aceptada y publicada debes seguir ciertas normas de comportamiento.
+                        <hr class='my-4'/> 
+                        <p>Para saber mas sobre el reglamento haz clic en el botón.</p>
+                        <h:link class="btn btn-info btn-lg" outcome="/info/rules">Reglas</h:link>
+                    </div>
+                </div>
+            </div>
+           
+        </main>
+    </ui:define>
+
+</ui:composition>

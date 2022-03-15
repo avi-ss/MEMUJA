@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/layout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form>
+            <h:outputScript name="register.ctrl.js" library="js" target="head"/>
+        </h:form>
+        
+        <div class="container my-5">
+            <div class="abs-center">
+                <form id="registerForm" class="border p-3 form" method="POST">
+
+                    <div id="errores"><!-- Mensajes de error --></div>
+                    
+                    <div class="form-group">
+
+                        <strong><label for="usuario">Nombre de usuario</label></strong>
+                        <input id="usuario" class="form-control" name="usuario" placeholder="Usuario" required="true"/>
+
+                    </div>
+                    <div class='form-group'> 
+
+                        <strong><label for="correo">Email</label></strong>
+                        <input id="correo" class="form-control" name="correo" placeholder="Correo" required="true"/>
+
+                    </div>
+                    <div class="form-group">
+
+                        <strong><label for="clave1">Contraseña</label></strong>
+                        <input type="password" id="clave1" class="form-control" name="clave1" placeholder="Contraseña" required="true"/>         
+                        <input type="password" class="form-control" name="clave2" placeholder="Repite la contraseña"/>   
+
+                    </div>
+
+                    <input class="btn btn-primary" name="enviar" type="Submit" value="Registrar" />
+
+                </form>
+            </div>
+        </div>
+    </ui:define>
+
+
+</ui:composition>

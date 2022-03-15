@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="value" required="true"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <div class="container">
+
+            <div class="bg-white p-2">
+                <div class="d-flex flex-row user-info">
+                    <p:graphicImage class='fluid' width="50" library="images" name="misc/test_profile.png"/>
+                    <div class="d-flex flex-column justify-content-start ml-2">
+                        <span class="d-block font-weight-bold name">#{cc.attrs.value.usuario.usuario}</span>
+                        <span class="date text-black-50">#{cc.attrs.value.fechaSubida}</span>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <div class="row">
+                    <div class="col-md-10">
+                    <p class="comment-text">#{cc.attrs.value.texto}</p>
+                    </div>
+                    <div class="col-md-2" >
+                        <p:commandButton rendered="#{ctrlLogin.esADMIN()}" icon="pi pi-trash"  title="Borrar"
+                                                  action="#{ctrlComentarios.borra(c.id)}">
+                                </p:commandButton>
+                        
+                    </div>
+                </div>
+                    </div>
+            </div>
+            
+        </div>
+    </cc:implementation>
+</html>

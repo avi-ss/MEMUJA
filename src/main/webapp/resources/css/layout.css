@@ -1,0 +1,60 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18-mar-2021, 9:45:07
+    Author     : alber
+*/
+
+@font-face {
+    font-family: Avis;
+    src: url("#{resource['fonts/Avis-Regular.otf']}");
+}
+
+.top-nav-bar{
+    background: url("#{resource['images/layout/header_fixed.png']}");
+    background-size: 100%;
+    border-bottom: 4px solid #107b0b;
+}
+
+.top-nav-text {
+    display: inline-block;
+    margin-left: 1.5rem;
+    padding: 0.5rem;
+    padding-bottom: 0.3rem;
+    font-family: Avis;
+    color: #2a2a2a;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.top-nav-text:hover {
+
+}
+
+body{
+    background-image: url("#{resource['images/layout/test_bg.png']}");
+}
+
+.bot-nav-text {
+    display: inline-block;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 0.3rem;
+    padding-bottom: 0;
+    font-family: Avis;
+    color: #f3f3f3;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.bot-nav-text:hover {
+
+}
+
+.bot-nav-bar{
+    background: url("#{resource['images/layout/footer.png']}");
+    background-size: 100%;
+}

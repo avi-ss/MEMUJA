@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./WEB-INF/templates/layout.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:memuja="http://xmlns.jcp.org/jsf/composite/memuja-comps"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="content">
+        <main class="container my-5">
+
+            <div class="row">
+                <div class="col-sm-6 col-md-8">
+
+                    <ui:repeat var='m' value="#{ctrlMemes.getMemes()}">
+                        <memuja:meme value="#{m}"/>
+                        <br/><br/>
+                    </ui:repeat>
+
+                </div>
+                <div class="col-6 col-md-4">
+                    <table>
+                        <tbody>
+
+                            <c:if test="${empty ctrlMemes.mejorMeme}">
+                                <td style="text-align: center">
+                                    <p:graphicImage width="50%" library="images" name="misc/monkey_error.png"/>
+                                    <p>No se encontró ningun mejor meme.</p>
+                                    <br></br>
+                                </td>  
+                            </c:if>
+                            <c:if test="${not empty ctrlMemes.mejorMeme}">
+                                <tr>
+                                    <td style="text-align: center">
+                                        <c:set var='m' value="#{ctrlMemes.mejorMeme}"/>
+                                        <h:link outcome="/memes/publication"> 
+                                            <h:graphicImage width="40%" value="#{ctrlMemes.imagesUrl}/#{m.rutaImg}"/>
+                                            <f:param name="id" value="${m.id}"/>
+                                        </h:link>
+                                        <p>Mejor meme de la semana</p>
+                                        <br></br>
+                                    </td>
+                                </tr>
+                            </c:if>
+
+                            <c:if test="${empty ctrlUsuarios.mejoresUsuarios}">
+                                <td style="text-align: center">
+                                    <p:graphicImage width="50%" library="images" name="misc/monkey_error.png"/>
+                                    <p>No se encontraron mejores usuarios.</p>
+                                    <br></br>
+                                </td>  
+                            </c:if>
+                            <c:if test="${not empty ctrlUsuarios.mejoresUsuarios}">
+                                <ui:repeat var="user" value="#{ctrlUsuarios.mejoresUsuarios}">
+                                    <td style="text-align: center">
+                                        <h:link outcome="/users/profile">
+                                            <f:param name="id" value="#{user.usuario}"/>
+                                            <p:graphicImage width="35%" library="images" name="misc/test_profile.png"/>
+                                        </h:link>
+                                        <p>Mejor Usuario: #{user.usuario}</p>
+                                        <br></br>
+                                    </td>
+                                </ui:repeat>
+                            </c:if>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div >
+        </main>
+
+    </ui:define>
+
+</ui:composition>

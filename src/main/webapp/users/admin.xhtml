@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/layout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="content">
+        <div class="container my-5">
+            <div class="abs-center">
+                <h1>GESTIÓN DE USUARIOS</h1>
+                <h:form id="form">
+                    <p:dataTable var="u" value="#{ctrlUsuarios.rolUsuarios}">
+                        <p:column headerText="Usuario" sortBy="#{u.usuario}">
+                            #{u.usuario}
+                        </p:column>
+                        <p:column headerText="Correo" sortBy="#{u.correo}">
+                            #{u.correo}
+                        </p:column>
+
+                        <p:column headerText="Contraseña" sortBy="#{u.contraseña}">
+                            #{u.contraseña}
+                        </p:column>
+                        <p:column>
+
+
+                            <p:commandButton  icon="pi pi-trash"  title="Borrar"
+                                              action="#{ctrlUsuarios.borra(u.id)}">
+                                <p:confirm type="popup" header="Confirmation" message="Do you want to delete this user?" icon="pi pi-info-circle"/>
+                            </p:commandButton>
+
+                            <p:commandButton  icon="pi pi-pencil"  title="Editar"
+                                              action="#{ctrlUsuarios.edita(u.id)}"/>
+
+                            <p:confirmPopup global="true">
+                                <p:commandButton value="No" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirm-popup-yes" />
+                            </p:confirmPopup>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                
+                    <h1>GESTIÓN DE MEMES</h1>
+                    
+                <h:form id="fmemes">
+                    <p:dataTable var="u" value="#{ctrlMemes.memes}">
+                        
+                        <p:column headerText="ID" sortBy="#{u.id}">
+                            #{u.id}
+                        </p:column>
+                        <p:column headerText="Titulo" sortBy="#{u.titulo}">
+                            #{u.titulo}
+                        </p:column>
+                        
+                        <p:column headerText="Usuario" sortBy="#{u.usuario.usuario}">
+                            #{u.usuario.usuario}
+                        </p:column>
+                        
+                        
+
+                        <p:column headerText="Fecha subida" sortBy="#{u.fechaSubida}">
+                            #{u.fechaSubida}
+                        </p:column>
+                        <p:column>
+
+
+                            <p:commandButton  icon="pi pi-trash"  title="Borrar"
+                                              action="#{ctrlMemes.borra(u.id)}">
+                                <p:confirm type="popup" header="Confirmation" message="Do you want to delete this meme?" icon="pi pi-info-circle"/>
+                            </p:commandButton>
+
+                        
+                            <p:confirmPopup global="true">
+                                <p:commandButton value="No" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirm-popup-yes" />
+                            </p:confirmPopup>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+
+
+</ui:composition>

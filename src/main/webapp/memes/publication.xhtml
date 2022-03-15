@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/layout.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:memuja="http://xmlns.jcp.org/jsf/composite/memuja-comps">
+
+    <ui:define name="content">
+        <h:head>
+            <f:metadata>
+                <f:viewParam name="id" required="true"
+                             value="#{ctrlMemes.meme.id}"/>
+                <f:viewAction action="#{ ctrlMemes.recupera() }"/>
+                <f:viewAction action="#{ ctrlComentarios.recupera(ctrlMemes.meme) }"/>
+            </f:metadata>
+        </h:head>
+
+        <main class="container my-5">
+
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <bold><h3>#{ctrlMemes.meme.titulo}</h3></bold>
+                </div>               
+            </div>
+
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <p>Subido por:&nbsp; </p>
+                    <span>
+                        <h:link outcome="/users/profile">
+                            <p><i>#{ctrlMemes.meme.usuario.usuario}</i></p>
+                            <f:param name="id" value="${ctrlMemes.meme.usuario.usuario}"/>
+                        </h:link>
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col my-3 d-flex justify-content-center">
+                    <h:graphicImage width="60%" value="#{ctrlMemes.imagesUrl}/#{ctrlMemes.meme.rutaImg}"/>
+                </div>
+            </div>
+
+            <div class="row d-flex justify-content-center">
+                <div class="col-5">
+                    <div class='btn-group d-flex justify-content-between' role='group' aria-label='Basic example'> 
+                        <button type='button' class='btn btn-danger d-flex justify-content-around'>
+                            <p:graphicImage class='fluid' width="32" height="32" library="images" name="misc/test_like.JPG"/>#{ctrlMemes.meme.likes}
+                        </button>
+                        <button type='button' class='btn btn-info d-flex justify-content-around'>
+                            <p:graphicImage class='fluid' width="32" height="32" library="images" name="misc/test_comment.jpg"/>#{ctrlMemes.numComentarios()}
+                        </button> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-5">
+                <div class="d-flex justify-content-center row">
+                    <div class="col-md-8">
+                        <div class="d-flex flex-column comment-section">
+                            <h:form id="comment">
+                                <div class="bg-white p-2 mt-2">
+                                    <div class="d-flex flex-row align-items-start">
+                                        <p:graphicImage class='fluid' width="40" library="images" name="misc/test_profile.png"/>
+                                        <h:inputTextarea class="form-control ml-1 shadow-none textarea" style="resize: none" value = "#{ctrlComentarios.comentario.texto}"/>
+                                    </div>
+                                    <div class="mt-2 text-right">
+                                        <h:commandButton class="btn btn-primary btn-sm shadow-none" value="Publicar" action="#{ctrlComentarios.crea()}"/>
+                                    </div>
+                                </div>
+                            </h:form>
+                            <ui:repeat var="c" value="#{ctrlComentarios.comentarios}">
+                                <memuja:comentario value="#{c}"/>
+                            </ui:repeat>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </ui:define>
+
+</ui:composition>
